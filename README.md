@@ -4,6 +4,7 @@ XSB-Terminal-Lib is a library that summons a Terminal running the XSB Interprete
 ------------------------
 ### How to build xsbInterpreter.js
 
+**1**. Make changes to C code in `src/xsbInterpreter.c`
 **1**. Run `make build`
 
 ------------------------
