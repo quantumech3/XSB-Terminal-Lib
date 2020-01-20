@@ -2,7 +2,7 @@
 XSB-Terminal-Lib is a library that summons a Terminal running the XSB Interpreter at a user-specified location in a webpage. 
 
 ------------------------
-### How to build xsbInterpreter.js
+### How to rebuild xsbInterpreter.js
 
 **1**. Make changes to C code in `src/xsbInterpreter.c`
 
