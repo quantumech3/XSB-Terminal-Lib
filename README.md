@@ -1,25 +1,16 @@
 ### Summary
 XSB-Terminal-Lib is a library that summons a Terminal running the XSB Interpreter at a user-specified location in a webpage. 
-
-------------------------
-### How to rebuild xsbInterpreter.js
-
-**1**. Make changes to C code in `src/xsbInterpreter.c`
-
-**2**. Run `make build`
-
 ------------------------
 ### How to setup XSB-Terminal-Lib
 
 **1**. Copy the following files/folders into your project directory
 
 * deps
-* xsbInterpreter.js
-* xsbInterpreter.wasm
-* xsbInterpreter.fetch.js
-* xsbInterpreter.worker.js
-* xsbInterpreter.js.mem
-* xsbInterpreter.data
+* xsbInterface.data
+* xsbInterface.js.mem
+* xsbInterface.wasm
+* xsbInterface.worker.js
+* xsbInterface.js
 * xsbTerminalLib.js
 
 **2**. Add the following code to the top of your project's `<head>` section
@@ -55,17 +46,11 @@ var XSB_PROPERTIES =
 
 * **deps/:** Folder containing JS & CSS dependancies
 * **xsbTerminalLib.js:** The XSB-Terminal-Lib JS library
-* **xsbInterpreter.js**: JS Web Assembly interpreter for XSB Prolog
-* **xsbInterpreter.wasm:** xsbInterpreter.js dependency
-* **xsbInterpreter.fetch.js:** xsbInterpreter.js dependency
-* **xsbInterpreter.worker.js:** xsbInterpreter.js dependency
-* **xsbInterpreter.js.mem:** xsbInterpreter.js dependency
-* **xsbInterpreter.data:** xsbInterpreter.js dependency
-* **src/:** Contains source files that get built into xsbInterpreter.js
-	* **xsbInterpreter.c:** Passes user input into XSB Interpreter and outputs query results
-	* **config/:** Contains XSB Interpreter object code
-	* **emu/:** Contains XSB C Interface header files
-* **makefile:** Used to rebuild src/xsbInterpreter.c to WASM
+* **xsbInterface.js**: JS Web Assembly interpreter for XSB Prolog
+* **xsbInterface.wasm:** xsbInterpreter.js dependency
+* **xsbInterface.worker.js:** xsbInterpreter.js dependency
+* **xsbInterface.js.mem:** xsbInterpreter.js dependency
+* **xsbInterface.data:** xsbInterpreter.js dependency
 * **debug_page.html:** Used to test modifications to this library
 	
 
