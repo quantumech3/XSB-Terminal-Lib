@@ -20,7 +20,6 @@ XSB-Terminal-Lib is a library that summons a Terminal running the XSB Interprete
 <script src="deps/jquery-3.2.1.min.js"></script>
 <script src="deps/jquery.terminal.min.js"></script>
 <link href="deps/jquery.terminal.min.css" rel="stylesheet"/>
-<script src="deps/xhr-mock.js"></script>
 ```
 
 **3**. Add the following code to the absolute bottom of your project's `<body>` section
