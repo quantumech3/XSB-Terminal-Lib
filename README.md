@@ -47,11 +47,11 @@ var XSB_PROPERTIES =
 
 * **deps/:** Folder containing JS & CSS dependancies
 * **xsbTerminalLib.js:** The XSB-Terminal-Lib JS library
-* **xsbInterface.js**: JS Web Assembly interpreter for XSB Prolog
-* **xsbInterface.wasm:** xsbInterpreter.js dependency
-* **xsbInterface.worker.js:** xsbInterpreter.js dependency
-* **xsbInterface.js.mem:** xsbInterpreter.js dependency
-* **xsbInterface.data:** xsbInterpreter.js dependency
+* **xsbInterface.js**: WASM-powered XSB C Interface wrapper
+* **xsbInterface.wasm:** xsbInterface.js dependency
+* **xsbInterface.worker.js:** xsbInterface.js dependency
+* **xsbInterface.js.mem:** xsbInterface.js dependency
+* **xsbInterface.data:** xsbInterface.js dependency
 * **debug_page.html:** Used to test modifications to this library
 	
 
