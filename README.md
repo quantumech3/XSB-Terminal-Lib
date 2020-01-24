@@ -1,5 +1,5 @@
 ### Summary
-XSB-Terminal-Lib is a library that summons a Terminal running the XSB Interpreter at a user-specified location in a webpage. This library uses JQuery-Terminal which provides access to tools that make rendering CLI visuals easier. JQuery-Terminal was created by none other then the genius himself, jCubic 👏👏!
+XSB-Terminal-Lib is a library that summons a Terminal running the XSB Interpreter at a user-specified location in a webpage. This library uses JQuery-Terminal which provides access to tools that make rendering CLI visuals easier. JQuery-Terminal was created by none other then the genius himself, jCubic 👏👏! You can find his Github page here: https://github.com/jcubic
 
 ------------------------
 ### How to setup XSB-Terminal-Lib
