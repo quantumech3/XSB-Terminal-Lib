@@ -14,23 +14,28 @@ let handleXSBCommand = function(command)
 	let results = XSB.execute(command)
 
 	// Print XSB query results if such results exist (XSB.execute() returns [""] when no query results exist which is equivilent to 'false' in JS)
-	if(results[0])
+	if(results.var[0])
 	{
 		let resultString = ""
 
-		for(let i = 0; i < results.length; i++)
+		for(let j = 0; j < results.var[0].length; j++)
 		{
-			// Append result of XSB query to resultString
-			resultString += results[i]
+			for(let i = 0; i < results.var.length; i++)
+			{
+				resultString += "Var #" + i.toString() + ": " + results.var[i][j] + "\n"
+			}
 
-			// Add newline to the end of each XSB query result unless it is the last XSB query result
-			if(i !== results.length - 1)
-				resultString += '\n'
+			resultString += '\n'
 		}
 
 		// Print resultString into Terminal
 		XSB.Events.onOutput(resultString)
 	}
+
+	if(results.isTrue)
+		XSB.Events.onOutput("yes.")
+	else
+		XSB.Events.onOutput("no.")
 }
 
 // Initialize Terminal object inside the (XSB_PROPERTIES.TERMINAL_ELEMENT_ID) element with custom startup message (XSB_PROPERTIES.STARTUP_MESSAGE)
