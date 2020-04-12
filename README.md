@@ -30,7 +30,6 @@ var XSB_PROPERTIES =
 {
 	STARTUP_MESSAGE: "", // Insert what you want your startup message to be here
 	TERMINAL_ELEMENT_ID: "" // Insert the ID of the HTML element you want the terminal to reside in here
-	QUERY_TIMEOUT: 4 // This parameter is optional. Insert (in seconds) how long you want an XSB query to execute before XSB hard resets. If this parameter is not set, XSB will not automatically hard reset.
 }
 </script>
 ```
@@ -61,4 +60,5 @@ var XSB_PROPERTIES =
 * All files and folders specified in step 1 of 'How to setup XSB-Terminal-Lib' must be in the same directory for XSB-Terminal-Lib to function properly
 * To execute `make build`, you must have Emscripten 1.38.30 installed.
 * You can manually force-stop and start the XSB Interpreter driving the XSB terminal with `xsbTerm.stopXSB()` and `xsbTerm.startXSB()`
-* In the terminal itself, you can invoke the `reset` command which will force-restart the XSB engine
+	* You must be connected to a server hosting this library to execute `xsbTerm.startXSB()` because this library needs to re-download xsbTerminalWorker.js
+* You can write files to XSB's file system with xsbTerm.writeFile()
