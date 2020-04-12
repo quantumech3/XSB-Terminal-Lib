@@ -60,4 +60,5 @@ var XSB_PROPERTIES =
 * All files and folders specified in step 1 of 'How to setup XSB-Terminal-Lib' must be in the same directory for XSB-Terminal-Lib to function properly
 * To execute `make build`, you must have Emscripten 1.38.30 installed.
 * You can manually force-stop and start the XSB Interpreter driving the XSB terminal with `xsbTerm.stopXSB()` and `xsbTerm.startXSB()`
+	* You must be connected to a server hosting this library to execute `xsbTerm.startXSB()` because this library needs to re-download xsbTerminalWorker.js
 * You can write files to XSB's file system with xsbTerm.writeFile()
