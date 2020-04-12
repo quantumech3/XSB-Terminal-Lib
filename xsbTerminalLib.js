@@ -1,52 +1,63 @@
-// Handles XSB commands that are typed into the console
-let handleXSBCommand = function(command)
+var xsbTerm = 
 {
-	
+	executeXSBCommand: function(command=""){}, // Invoked by JQuery terminal after the user inputs an XSB command
+	handleXSBOutput: function(results){}, // Invoked by XSB web worker when query results are returned from a command
+	startXSB: function(){},
+	stopXSB: function(){}
+}
+
+// Invoked by JQuery terminal after the user inputs an XSB command
+xsbTerm.executeXSBCommand = function(command="")
+{
 	// If either the user-inputted command lacks a period at the end, only contains a period, or is an empty string, throw error
 	// These user-errors must be handled because the XSB C Interface will crash on user input if they aren't handled
 	if(command[command.length - 1] != '.' || command.length == 1 || command.length == 0)
 	{
-		XSB.execute("writeln('Invalid command').")
+		xsbWorker.postMessage("writeln('Invalid command')."); // Invoke XSB command from web worker
 		return;
 	}
 
-	// Invoke XSB-JS-Interface to execute the command 'command' and gets results of the command (See XSB-JS-Interface source code comments for more info on XSB.execute())
-	let results = XSB.execute(command)
+	// Else if the command is valid, execute the XSB command via a web worker
+	xsbWorker.postMessage(command);
+}
 
+// Invoked by XSB web worker when query results are returned from a command
+xsbTerm.handleXSBOutput = function(results)
+{
 	// Print XSB query results if such results exist (XSB.execute() returns [""] when no query results exist which is equivilent to 'false' in JS)
 	if(results.var[0])
 	{
-		let resultString = ""
-
 		for(let j = 0; j < results.var[0].length; j++)
 		{
 			for(let i = 0; i < results.var.length; i++)
 			{
-				resultString += "Var #" + i.toString() + ": " + results.var[i][j] + "\n"
+				term.echo("Var #" + i.toString() + ": " + results.var[i][j])
 			}
-
-			resultString += '\n'
+			term.echo();
 		}
-
-		// Print resultString into Terminal
-		XSB.Events.onOutput(resultString)
 	}
 
 	if(results.isTrue)
-		XSB.Events.onOutput("yes.")
+		term.echo("yes.")
 	else
-		XSB.Events.onOutput("no.")
+		term.echo("no.")
 }
 
 // Initialize Terminal object inside the (XSB_PROPERTIES.TERMINAL_ELEMENT_ID) element with custom startup message (XSB_PROPERTIES.STARTUP_MESSAGE)
-var term = $('#' + XSB_PROPERTIES.TERMINAL_ELEMENT_ID).terminal(handleXSBCommand, {greetings: XSB_PROPERTIES.STARTUP_MESSAGE, prompt: "?- "});
+var term = $('#' + XSB_PROPERTIES.TERMINAL_ELEMENT_ID).terminal(xsbTerm.executeXSBCommand, {greetings: XSB_PROPERTIES.STARTUP_MESSAGE, prompt: "?- "});
 var re = /^___terminal::/;
 
-// Make XSB-JS-Interface output to terminal rather then browser console
-XSB.Events.onOutput = function(output, isError)
-{
-	term.echo(output)
-}
+// Initialize XSB interface web worker
+var xsbWorker = new Worker("xsbTerminalWorker.js");
 
-// Initialize XSB
-XSB.init()
+// When the XSB web worker returns query results resulting from an XSB command, pass results and standard output to executeXSBCommand() and handleXSBOutput()
+xsbWorker.onmessage = function(message)
+{
+	// Print standard output from XSB interpreter
+	if(message.data.stdout)
+		term.echo(message.data.stdout);
+
+	// Print results from XSB query
+	if(message.data.results)
+		xsbTerm.handleXSBOutput(message.data.results);
+}
