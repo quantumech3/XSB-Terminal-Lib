@@ -20,12 +20,10 @@
           TERMINAL_ELEMENT_ID: "terminal"
         }
     </script>
-
-    <script id="xsbInterface" src="xsbInterface.js"></script>   
+  
     <script src="xsbTerminalLib.js"></script>
 
     <script>
-
         function clickEvent()
         {
             xsbTerm.writeFile("script.P", $("#textbox").val())
@@ -40,7 +38,6 @@
                xsbTerm.startXSB(); // Wait 2 seconds and then restart XSB to prevent weird crashes
                term.exec("clear"); // Clear text from the terminal (Run the "clear" command)
             }, 5000);
-            
         }
     </script>
 
