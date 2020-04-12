@@ -61,4 +61,4 @@ var XSB_PROPERTIES =
 * To execute `make build`, you must have Emscripten 1.38.30 installed.
 * You can manually force-stop and start the XSB Interpreter driving the XSB terminal with `xsbTerm.stopXSB()` and `xsbTerm.startXSB()`
 	* You must be connected to a server hosting this library to execute `xsbTerm.startXSB()` because this library needs to re-download xsbTerminalWorker.js
-* You can write files to XSB's file system with xsbTerm.writeFile()
+* You can write files to XSB's file system with `xsbTerm.writeFile()`
