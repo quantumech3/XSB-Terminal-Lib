@@ -1,9 +1,22 @@
+var xsbWorker = new Worker("");
 var xsbTerm = 
 {
 	executeXSBCommand: function(command=""){}, // Invoked by JQuery terminal after the user inputs an XSB command
 	handleXSBOutput: function(results){}, // Invoked by XSB web worker when query results are returned from a command
 	startXSB: function(){},
 	stopXSB: function(){}
+}
+
+// When the XSB web worker returns query results resulting from an XSB command, pass results and standard output to executeXSBCommand() and handleXSBOutput()
+var handleWorkerMessage = function(message)
+{
+	// Print standard output from XSB interpreter
+	if(message.data.stdout)
+		term.echo(message.data.stdout);
+
+	// Print results from XSB query
+	if(message.data.results)
+		xsbTerm.handleXSBOutput(message.data.results);
 }
 
 // Invoked by JQuery terminal after the user inputs an XSB command
@@ -43,21 +56,25 @@ xsbTerm.handleXSBOutput = function(results)
 		term.echo("no.")
 }
 
+// Creates new instance of web worker
+xsbTerm.startXSB = function()
+{
+	// Initialize XSB web worker
+	xsbWorker = new Worker("xsbTerminalWorker.js");
+
+	// When the XSB web worker returns query results resulting from an XSB command, pass results and standard output to executeXSBCommand() and handleXSBOutput()
+	xsbWorker.onmessage = handleWorkerMessage;
+}
+
+// Terminates XSB web worker
+xsbTerm.stopXSB = function()
+{
+	xsbWorker.terminate();
+}
+
 // Initialize Terminal object inside the (XSB_PROPERTIES.TERMINAL_ELEMENT_ID) element with custom startup message (XSB_PROPERTIES.STARTUP_MESSAGE)
 var term = $('#' + XSB_PROPERTIES.TERMINAL_ELEMENT_ID).terminal(xsbTerm.executeXSBCommand, {greetings: XSB_PROPERTIES.STARTUP_MESSAGE, prompt: "?- "});
 var re = /^___terminal::/;
 
 // Initialize XSB interface web worker
-var xsbWorker = new Worker("xsbTerminalWorker.js");
-
-// When the XSB web worker returns query results resulting from an XSB command, pass results and standard output to executeXSBCommand() and handleXSBOutput()
-xsbWorker.onmessage = function(message)
-{
-	// Print standard output from XSB interpreter
-	if(message.data.stdout)
-		term.echo(message.data.stdout);
-
-	// Print results from XSB query
-	if(message.data.results)
-		xsbTerm.handleXSBOutput(message.data.results);
-}
+xsbTerm.startXSB();
