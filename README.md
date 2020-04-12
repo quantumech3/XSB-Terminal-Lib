@@ -30,7 +30,7 @@ var XSB_PROPERTIES =
 {
 	STARTUP_MESSAGE: "", // Insert what you want your startup message to be here
 	TERMINAL_ELEMENT_ID: "" // Insert the ID of the HTML element you want the terminal to reside in here
-	QUERY_TIMEOUT: 4 // This parameter is optional. Insert (in seconds) how long you want an XSB query to execute before XSB hard resets
+	QUERY_TIMEOUT: 4 // This parameter is optional. Insert (in seconds) how long you want an XSB query to execute before XSB hard resets. If this parameter is not set, XSB will not automatically hard reset.
 }
 </script>
 ```
