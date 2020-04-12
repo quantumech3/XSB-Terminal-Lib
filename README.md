@@ -37,7 +37,6 @@ var XSB_PROPERTIES =
 **4**. Add the following code to the absolute bottom of your project's `<body>` section
 
 ```html
-<script src="xsbInterface.js"></script>
 <script src="xsbTerminalLib.js"></script>
 ```
 
