@@ -13,6 +13,7 @@ XSB-Terminal-Lib is a library that summons a Terminal running the XSB Interprete
 * xsbInterface.worker.js
 * xsbInterface.js
 * xsbTerminalLib.js
+* xsbTerminalWorker.js
 
 **2**. Add the following code to the top of your project's `<head>` section
 
