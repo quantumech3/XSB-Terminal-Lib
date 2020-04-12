@@ -61,4 +61,4 @@ var XSB_PROPERTIES =
 * All files and folders specified in step 1 of 'How to setup XSB-Terminal-Lib' must be in the same directory for XSB-Terminal-Lib to function properly
 * To execute `make build`, you must have Emscripten 1.38.30 installed.
 * You can manually force-stop and start the XSB Interpreter driving the XSB terminal with `xsbTerm.stopXSB()` and `xsbTerm.startXSB()`
-* In the terminal itself, you can invoke the `reset` command which will force-restart the XSB engine
+* You can write files to XSB's file system with xsbTerm.writeFile()
