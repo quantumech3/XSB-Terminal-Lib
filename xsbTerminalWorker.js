@@ -36,11 +36,19 @@ XSB.init();
 // The main browser thread passes commands to this worker in the form of messages
 onmessage = function(command)
 {
-	// Execute the specified XSB command and return the query results in the form of a message
-	this.postMessage(
-		{
-			stdout: undefined,
-			results: XSB.execute(command.data)
-		}
-	);
+	// If the main browser thread requests for a file to be created, create a file in Emscripten's virtual file system
+	if(typeof command.data === "object")
+	{
+		FS.writeFile(command.data.fileName, command.data.fileData);
+	}
+	else
+	{
+		// Execute the specified XSB command and return the query results in the form of a message
+		this.postMessage(
+			{
+				stdout: undefined,
+				results: XSB.execute(command.data)
+			}
+		);
+	}
 }

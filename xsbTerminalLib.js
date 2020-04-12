@@ -4,7 +4,8 @@ var xsbTerm =
 	executeXSBCommand: function(command=""){}, // Invoked by JQuery terminal after the user inputs an XSB command
 	handleXSBOutput: function(results){}, // Invoked by XSB web worker when query results are returned from a command
 	startXSB: function(){},
-	stopXSB: function(){}
+	stopXSB: function(){},
+	writeFile: function(fileName="", fileData=""){} // Create a file in the Emscripten Virtual File system
 }
 
 // When the XSB web worker returns query results resulting from an XSB command, pass results and standard output to executeXSBCommand() and handleXSBOutput()
@@ -32,6 +33,12 @@ xsbTerm.executeXSBCommand = function(command="")
 
 	// Else if the command is valid, execute the XSB command via a web worker
 	xsbWorker.postMessage(command);
+}
+
+// Create a file in the Emscripten Virtual File system
+xsbTerm.writeFile = function(fileName="", fileData="")
+{
+	xsbWorker.postMessage({fileName, fileData});
 }
 
 // Invoked by XSB web worker when query results are returned from a command
@@ -76,5 +83,5 @@ xsbTerm.stopXSB = function()
 var term = $('#' + XSB_PROPERTIES.TERMINAL_ELEMENT_ID).terminal(xsbTerm.executeXSBCommand, {greetings: XSB_PROPERTIES.STARTUP_MESSAGE, prompt: "?- "});
 var re = /^___terminal::/;
 
-// Initialize XSB interface web worker
-xsbTerm.startXSB();
+// Initialize XSB interface web worker after 1 second to prevent weird crashes
+setTimeout(() => {xsbTerm.startXSB();}, 1000);
