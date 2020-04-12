@@ -47,6 +47,7 @@ var XSB_PROPERTIES =
 
 * **deps/:** Folder containing JS & CSS dependancies
 * **xsbTerminalLib.js:** The XSB-Terminal-Lib JS library
+* **xsbTerminalWorker.js:** JS code for the web worker driving the XSB interface
 * **xsbInterface.js**: WASM-powered XSB C Interface wrapper
 * **xsbInterface.wasm:** xsbInterface.js dependency
 * **xsbInterface.worker.js:** xsbInterface.js dependency
