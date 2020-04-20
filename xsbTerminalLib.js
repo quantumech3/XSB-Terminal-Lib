@@ -27,11 +27,12 @@ xsbTerm.executeXSBCommand = function(command="")
 	// These user-errors must be handled because the XSB C Interface will crash on user input if they aren't handled
 	if(command[command.length - 1] != '.' || command.length == 1 || command.length == 0)
 	{
-		xsbWorker.postMessage("writeln('Invalid command')."); // Invoke XSB command from web worker
+		xsbWorker.postMessage("writeln('Invalid command').");
 		return;
 	}
 
 	// Else if the command is valid, execute the XSB command via a web worker
+	term.set_prompt(""); 
 	xsbWorker.postMessage(command);
 }
 
@@ -61,11 +62,16 @@ xsbTerm.handleXSBOutput = function(results)
 		term.echo("yes.")
 	else
 		term.echo("no.")
+
+	term.set_prompt("?- ");
 }
 
 // Creates new instance of web worker
 xsbTerm.startXSB = function()
 {
+	// Reset terminal prompt
+	term.set_prompt("?- ");
+
 	// Initialize XSB web worker
 	xsbWorker = new Worker("xsbTerminalWorker.js");
 
