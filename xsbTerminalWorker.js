@@ -38,7 +38,12 @@ onmessage = function(command)
 {
 	if(command.data.command)
 	{
-		// TODO: Handle commands
+		switch(command.data.command)
+		{
+			case "writeFile": // Handle writeFile command
+				FS.writeFile(command.data.args[0], command.data.args[1]); 
+				break;
+		}
 	}
 	else if(typeof command.data == "string")
 	{
@@ -50,10 +55,4 @@ onmessage = function(command)
 			}
 		);
 	}
-	else // TODO: Remove this entire else block once writeFile() command is implemented
-	{
-		// Temp code for debugging purposes. Allows scripts to be loaded into XSB's virtual file system
-		FS.writeFile(command.data.fileName, command.data.data); 
-	}
-	
 }

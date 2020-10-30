@@ -52,10 +52,10 @@ xsbTerm.executeXSBCommand = function(command="")
 // Create a file in the Emscripten Virtual File system
 xsbTerm.writeFile = function(fileName="", data="")
 {
-	xsbWorker.postMessage({fileName, data});
+	xsbWorker.postMessage({command: "writeFile", args: [fileName, data]}); // Invoke readFile(fileName, data) command
 }
 
-xsbTerm.readFile = function(fileName="", callback={})
+xsbTerm.readFile = function(fileName="", callback={}) 
 {
 	// TODO: Implement readFile() function
 }
