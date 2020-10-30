@@ -18,7 +18,11 @@ var handleWorkerMessage = function(message)
 {
 	if(message.data.command)
 	{
-		// TODO: Handle callbacks here
+		switch(message.data.command)
+		{
+			case "read_file_callback":
+				break; // TODO: Implement this
+		}
 	}
 	else
 	{
@@ -52,7 +56,7 @@ xsbTerm.executeXSBCommand = function(command="")
 // Create a file in the Emscripten Virtual File system
 xsbTerm.writeFile = function(fileName="", data="")
 {
-	xsbWorker.postMessage({command: "writeFile", args: [fileName, data]}); // Invoke readFile(fileName, data) command
+	xsbWorker.postMessage({command: "write_file", args: [fileName, data]}); // Invoke readFile(fileName, data) command
 }
 
 xsbTerm.readFile = function(fileName="", callback={}) 

@@ -40,7 +40,7 @@ onmessage = function(command)
 	{
 		switch(command.data.command)
 		{
-			case "writeFile": // Handle writeFile command
+			case "write_file": // Handle writeFile command
 				FS.writeFile(command.data.args[0], command.data.args[1]); 
 				break;
 		}
