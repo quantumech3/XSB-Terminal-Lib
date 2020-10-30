@@ -21,6 +21,7 @@ var handleWorkerMessage = function(message)
 		switch(message.data.command)
 		{
 			case "read_file_callback":
+				console.log("[DBG]: " + message.data.args)
 				break; // TODO: Implement this
 		}
 	}

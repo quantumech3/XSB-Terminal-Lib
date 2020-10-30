@@ -43,6 +43,8 @@ onmessage = function(command)
 			case "write_file": // Handle writeFile command
 				FS.writeFile(command.data.args[0], command.data.args[1]); 
 				break;
+			case "read_file": // Handle readFile command
+				postMessage({command: "read_file_callback", args: [command.data.args[0], FS.readFile(command.data.args[0])]});
 		}
 	}
 	else if(typeof command.data == "string")
