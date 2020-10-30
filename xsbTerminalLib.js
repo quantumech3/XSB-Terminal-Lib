@@ -15,13 +15,21 @@ let _callbackQueue = [];
 // When the XSB web worker returns query results resulting from an XSB command, pass results and standard output to executeXSBCommand() and handleXSBOutput()
 var handleWorkerMessage = function(message)
 {
-	// Print standard output from XSB interpreter
-	if(message.data.stdout)
-		term.echo(message.data.stdout);
+	if(message.data.command)
+	{
+		// TODO: Handle callbacks here
+	}
+	else
+	{
+		// Print standard output from XSB interpreter
+		if(message.data.stdout)
+			term.echo(message.data.stdout);
 
-	// Print results from XSB query
-	if(message.data.results)
-		xsbTerm.handleXSBOutput(message.data.results);
+		// Print results from XSB query
+		if(message.data.results)
+			xsbTerm.handleXSBOutput(message.data.results);
+	}
+	
 }
 
 // Invoked by JQuery terminal after the user inputs an XSB command
