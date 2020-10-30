@@ -20,7 +20,7 @@ var handleWorkerMessage = function(message)
 	{
 		switch(message.data.command)
 		{
-			case "read_file_callback":
+			case "read_file_callback": // Handle read_file_callback() command according to design document
 				for(let i = 0; i < _callbackQueue.length; i++)
 				{
 					let cmd = _callbackQueue[i]
@@ -119,6 +119,7 @@ xsbTerm.startXSB = function()
 xsbTerm.stopXSB = function()
 {
 	xsbWorker.terminate();
+	_callbackQueue = [] // Clear _callbackQueue
 }
 
 xsbTerm.clear = function()
