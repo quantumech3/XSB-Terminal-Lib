@@ -63,3 +63,4 @@ var XSB_PROPERTIES =
 	* You must be connected to a server hosting this library to execute `xsbTerm.startXSB()` because this library needs to re-download xsbTerminalWorker.js
 * You can write files to XSB's file system with `xsbTerm.writeFile()`
 * You can read files in XSB's file system with `xsbTerm.readFile()`
+* You can clear the terminal with `xsbTerm.clear()` 
