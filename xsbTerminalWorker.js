@@ -53,7 +53,7 @@ onmessage = function(command)
 	else // TODO: Remove this entire else block once writeFile() command is implemented
 	{
 		// Temp code for debugging purposes. Allows scripts to be loaded into XSB's virtual file system
-		FS.writeFile(command.data.fileName, command.data.fileData); 
+		FS.writeFile(command.data.fileName, command.data.data); 
 	}
 	
 }
